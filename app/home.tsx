@@ -17,14 +17,12 @@ export default function HomeScreen() {
   useEffect(() => {
     const loadData = async () => {
       try {
-        // 1. coba ambil dari AsyncStorage dulu
         const saved = await AsyncStorage.getItem("loggedInUser");
         if (saved) {
           setData(JSON.parse(saved));
           return;
         }
 
-        // 2. kalau tidak ada → ambil dari Firestore
         const user = auth.currentUser;
         if (user) {
           const snap = await getDoc(doc(db, "mahasiswa", user.uid));
